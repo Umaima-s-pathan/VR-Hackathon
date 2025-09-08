@@ -96,19 +96,6 @@ VR-Hackathon/
 ## 👩‍💻 **Author**
 
 **Umaima Pathan**
-LinkedIn [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square\&logo=linkedin)]([YOUR-LINKEDIN-LINK](https://www.linkedin.com/in/umaima-pathan-b0586124a/))
-
----
-
-### ✅ **What You’ll Submit**
-
-✔ **Deployed App Link:**
-`https://umaima-s-pathan.github.io/VR-Hackathon/`
-
-✔ **Loom Video Link:**
-[
-](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=5d4ebf5a-7aa7-43b6-9e91-9a3fca50c3bf)
-✔ **GitHub Repo Link:**
-`https://github.com/umaima-s-pathan/VR-Hackathon`
+LinkedIn ([YOUR-LINKEDIN-LINK](https://www.linkedin.com/in/umaima-pathan-b0586124a/))
 
 ---
