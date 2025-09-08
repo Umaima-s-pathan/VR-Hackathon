@@ -1,64 +1,114 @@
-# VR 180 Immersive Experience
+# 🌐 VR 180° Immersive Experience
 
-An interactive VR 180 web application built with A-Frame. Includes video playback controls, VR headset support, and an overlay UI for desktop and mobile.
+**Explore the world in 180° VR right from your browser!**
 
-## Features
-- VR 180 videosphere with playback controls (play/pause, volume, seek)
-- Desktop, mobile, and VR headset support (WebXR)
-- Gaze and click interactions inside the scene
-- Overlay UI with auto-hide and accessibility improvements
-- Ready-to-deploy GitHub Pages workflow
+Live Demo [![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge\&logo=googlechrome)](https://umaima-s-pathan.github.io/VR-Hackathon/)
+Watch Video [![Watch Video](https://img.shields.io/badge/Watch-Loom%20Demo-blue?style=for-the-badge\&logo=loom)]([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=b731e5a7-9522-43da-b433-7e0e430917a6))
 
-## Quickstart
-Prerequisites: Node.js 16+ recommended
+---
 
-1) Install dependencies
-   npm install
+## 📌 **Overview**
 
-2) Start local server
-   npm run start
+This project is built for the **Hackathon: VR 180° Immersive Experience Challenge**.
+It delivers an **interactive and immersive experience** using **WebXR & Three.js**, allowing users to:
+✅ **View 180° panoramic content**
+✅ **Look around freely**
+✅ **Switch to VR Mode for a fully immersive experience**
 
-3) Open the app
-   http://localhost:8000
+---
 
-Note: Browser autoplay policies may block audio/video until the first user interaction. Click the Play control if needed.
+## 🚀 **Live Demo**
 
-## Project Structure
-- index.html: Main A-Frame scene and UI overlay
-- js/vr-experience.js: Core VR logic (playback, interactions, VR events)
-- js/ui-controls.js: Overlay UI controls and accessibility
-- css/style.css: Styling for loading, UI, modal, and responsiveness
-- assets/: Place your videos and images here
+🔗 **APP [Click here to explore the app](https://umaima-s-pathan.github.io/VR-Hackathon/)**
 
-## VR 180 Notes
-The scene uses a-videosphere configured for 180° content. Replace the sample video source in index.html with your VR 180 video.
+---
 
-## Deployment (GitHub Pages)
-This repo includes a GitHub Actions workflow (.github/workflows/deploy.yml) that deploys the site to GitHub Pages on every push to main.
+## 🛠 **Tech Stack**
 
-Steps to deploy:
-1) Create a new GitHub repository and add it as remote
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git branch -M main
-   git push -u origin main
+* **HTML5, CSS3, JavaScript**
+* **WebXR API**
+* **Three.js (for 3D & VR rendering)**
+* **A-Frame (optional for VR controls)**
 
-2) The included workflow will build and deploy automatically to GitHub Pages. Once it completes, your site will be live at:
-   https://<your-username>.github.io/<repo-name>/
+---
 
-## Recording a Loom Demo
-- Start the local server (npm run start)
-- Open the app at http://localhost:8000
-- Use Loom to record the screen while demonstrating:
-  - Entering VR (if available) or desktop interactions
-  - Play/pause, seeking, mute/unmute
-  - Interacting with in-scene elements (buttons)
-  - Mobile-friendly UI (optional)
+## ✅ **Features**
 
-## Customization Ideas
-- Swap in your own VR 180 video and ambient audio
-- Add hotspots with info panels
-- Integrate subtitles or captions mapped to the sphere
-- Add multiple scenes with a menu
+✔️ **180° VR Content Playback**
+✔️ **Interactive Look-Around Controls**
+✔️ **VR Mode (Cardboard / Headset Ready)**
+✔️ **Cross-Device Support (Mobile + Desktop)**
 
-## License
-MIT
+---
+
+## 🎥 **Demo Video**
+
+📹 **Loom [Watch the Loom Demo]([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=90082fef-fe62-49ef-b1f6-cf0e2dd6149b))**
+
+---
+
+## 🖼 **Screenshots**
+
+![Screenshot 1](<img width="1843" height="881" alt="Screenshot 2025-09-09 032622" src="https://github.com/user-attachments/assets/2c0a6462-fcca-4dca-a30b-3759c810e981" />
+)
+
+---
+
+## 🔧 **How to Run Locally**
+
+```bash
+# Clone the repository
+git clone https://github.com/umaima-s-pathan/VR-Hackathon.git
+
+# Open the project folder
+cd VR-Hackathon
+
+# Start a local server (Python)
+python3 -m http.server 8000
+
+# Open in browser
+http://localhost:8000/
+```
+
+---
+
+## 📂 **Project Structure**
+
+```
+VR-Hackathon/
+│
+├── index.html       # Main entry point
+├── style.css        # Styling
+├── script.js        # Core VR logic
+└── assets/          # Images & 180° videos
+```
+
+---
+
+## 🌟 **Why This Project Stands Out**
+
+* **Built for modern immersive experiences**
+* **Uses WebXR for VR-ready functionality**
+* **Lightweight, fast, and works in the browser**
+
+---
+
+## 👩‍💻 **Author**
+
+**Umaima Pathan**
+LinkedIn [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square\&logo=linkedin)]([YOUR-LINKEDIN-LINK](https://www.linkedin.com/in/umaima-pathan-b0586124a/))
+
+---
+
+### ✅ **What You’ll Submit**
+
+✔ **Deployed App Link:**
+`https://umaima-s-pathan.github.io/VR-Hackathon/`
+
+✔ **Loom Video Link:**
+[
+](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=5d4ebf5a-7aa7-43b6-9e91-9a3fca50c3bf)
+✔ **GitHub Repo Link:**
+`https://github.com/umaima-s-pathan/VR-Hackathon`
+
+---
