@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VR 180 Immersive Experience</title>
+    <meta name="description" content="VR 180 immersive experience with interactive hotspots and WebXR" />
+
+    <!-- Icons + A-Frame -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; min-height: 100vh; overflow-x: hidden; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 0; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); background: linear-gradient(to right, gold, orange, gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.3rem; opacity: 0.9; margin-bottom: 10px; }
+        .instructions { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); }
+        .demo-note { background: rgba(255,215,0,0.1); border-left: 4px solid gold; padding: 15px; margin: 20px 0; border-radius: 4px; font-size: 0.9rem; }
+        .stats { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; }
+        .stat-item { text-align: center; padding: 10px; }
+        .stat-number { font-size: 2.2rem; font-weight: bold; color: gold; margin-bottom: 5px; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+        .controls { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .ctrl-btn { padding: 12px 20px; background: rgba(255,215,0,0.2); border: 2px solid gold; color: #fff; border-radius: 30px; cursor: pointer; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .ctrl-btn:hover { background: rgba(255,215,0,0.4); transform: translateY(-2px); }
+        .main-content { display: flex; gap: 30px; margin: 30px 0; }
+        .vr-section { flex: 2; }
+        .info-section { flex: 1; background: rgba(0,0,0,0.3); border-radius: 15px; padding: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); }
+        .vr-container { position: relative; width: 100%; height: 500px; border-radius: 16px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5); background: #000; }
+        .video-player { width: 100%; height: 100%; position: relative; overflow: hidden; background: #000; }
+        /* A-Frame embed fills container */
+        .video-player a-scene { position: absolute !important; inset: 0; }
+        .environment-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35)); z-index: 2; }
+        .video-placeholder-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); text-align: center; font-size: 1.2rem; z-index: 3; pointer-events: none; }
+        .hotspot { position: absolute; width: 32px; height: 32px; background: rgba(255,255,255,0.9); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(255,215,0,0.8); transition: all 0.3s ease; z-index: 4; border: 2px solid #fff; }
+        .hotspot:hover { transform: scale(1.2); background: gold; }
+        .hotspot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: rgba(255,215,0,0.5); animation: pulse 1.5s infinite; z-index: -1; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 70% { transform: scale(1.5); opacity: 0; } 100% { transform: scale(1); opacity: 0; } }
+        .info-panel { position: absolute; background: rgba(0,0,0,0.95); border-radius: 12px; padding: 20px; width: 300px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); z-index: 5; display: none; backdrop-filter: blur(10px); border: 1px solid rgba(255,215,0,0.3); color: #fff; }
+        .info-panel h3 { margin-bottom: 10px; color: gold; display: flex; align-items: center; gap: 10px; }
+        .info-panel p { line-height: 1.5; margin-bottom: 15px; font-size: 0.95rem; }
+        .close-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.1); border: none; color: #fff; cursor: pointer; font-size: 1.2rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .close-btn:hover { background: rgba(255,255,255,0.2); }
+        .playback-controls { position: absolute; left: 0; right: 0; bottom: 0; padding: 15px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); display: flex; align-items: center; gap: 15px; z-index: 6; }
+        .control-btn { background: rgba(0,0,0,0.4); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .control-btn:hover { color: gold; transform: scale(1.1); background: rgba(0,0,0,0.6); }
+        .progress-bar { flex: 1; height: 5px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; }
+        .progress { height: 100%; width: 0%; background: gold; border-radius: 10px; transition: width 0.2s linear; }
+        footer { text-align: center; padding: 30px 0; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; }
+        .features { display: flex; flex-wrap: wrap; gap: 20px; margin: 40px 0; justify-content: center; }
+        .feature-card { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; width: 250px; text-align: center; transition: transform 0.3s ease; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); }
+        .feature-card:hover { transform: translateY(-5px); background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.3); }
+        .feature-icon { font-size: 2.2rem; margin-bottom: 15px; color: gold; }
+        @media (max-width: 900px) { .main-content { flex-direction: column; } h1 { font-size: 2.2rem; } .subtitle { font-size: 1.1rem; } .vr-container { height: 400px; } .info-panel { width: 250px; font-size: 0.9rem; } }
+        @media (max-width: 600px) { .vr-container { height: 350px; } .features { flex-direction: column; align-items: center; } .feature-card { width: 100%; } .controls { flex-direction: column; align-items: center; } .ctrl-btn { width: 100%; justify-content: center; } .stats { flex-direction: column; gap: 20px; } .info-panel { width: 200px; padding: 15px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-vr-cardboard"></i> VR 180 Immersive Experience</h1>
+            <p class="subtitle">Explore interactive content in 180 degrees</p>
+            <p>Drag to look around • Click hotspots to discover content</p>
+        </header>
+
+        <div class="instructions">
+            <p><i class="fas fa-lightbulb"></i> This is a functional VR 180 demo with real video playback, WebXR VR mode, and interactive hotspots.</p>
+        </div>
+        <div class="demo-note">
+            <p><i class="fas fa-info-circle"></i> Replace the sample video in assets/videos with your 180° content for best results.</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Interactive Hotspots</div></div>
+            <div class="stat-item"><div class="stat-number">180°</div><div class="stat-label">Field of View</div></div>
+            <div class="stat-item"><div class="stat-number">4K</div><div class="stat-label">Video Quality</div></div>
+            <div class="stat-item"><div class="stat-number">10:00</div><div class="stat-label">Duration</div></div>
+        </div>
+
+        <div class="controls">
+            <button class="ctrl-btn" id="play-btn"><i class="fas fa-play"></i> Play Experience</button>
+            <button class="ctrl-btn" id="reset-view"><i class="fas fa-sync-alt"></i> Reset View</button>
+            <button class="ctrl-btn" id="vr-mode"><i class="fas fa-vr-cardboard"></i> Enter VR Mode</button>
+            <button class="ctrl-btn" id="help-btn"><i class="fas fa-question-circle"></i> Help</button>
+        </div>
+
+        <div class="main-content">
+            <div class="vr-section">
+                <div class="vr-container" id="vr-scene">
+                    <div class="video-player">
+                        <!-- A-Frame Scene: real 180° playback -->
+                        <a-scene id="aframeScene" embedded background="color: #000" renderer="antialias: true; logarithmicDepthBuffer: true;">
+                            <a-assets>
+                                <video id="vr180Video" playsinline webkit-playsinline crossorigin="anonymous" preload="auto">
+                                    <source src="assets/videos/vr180-sample.mp4" type="video/mp4" />
+                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                                </video>
+                            </a-assets>
+                            <a-videosphere id="videoSphere" src="#vr180Video" radius="100" theta-length="180" phi-length="180" phi-start="90"></a-videosphere>
+                            <a-entity id="cameraRig">
+                                <a-camera id="camera" look-controls="enabled: true; reverseMouseDrag: false" wasd-controls="enabled: false" position="0 1.6 0"></a-camera>
+                            </a-entity>
+                        </a-scene>
+
+                        <div class="environment-overlay"></div>
+                        <div class="video-placeholder-text" id="placeholderText">VR 180° EXPERIENCE<br><span style="font-size:0.9rem;opacity:.9;">(Drag to look around • Click on glowing hotspots)</span></div>
+
+                        <!-- Hotspots (UI overlay) -->
+                        <div class="hotspot" style="top: 30%; left: 40%;" data-info="info1"><i class="fas fa-mountain" style="font-size:14px;color:#333"></i></div>
+                        <div class="hotspot" style="top: 60%; left: 65%;" data-info="info2"><i class="fas fa-tree" style="font-size:14px;color:#333"></i></div>
+                        <div class="hotspot" style="top: 45%; left: 25%;" data-info="info3"><i class="fas fa-water" style="font-size:14px;color:#333"></i></div>
+
+                        <!-- Info Panels -->
+                        <div class="info-panel" id="info1">
+                            <button class="close-btn">&times;</button>
+                            <h3><i class="fas fa-mountain"></i> Mountain Peak</h3>
+                            <p>This majestic peak stands at 3,500m. The unique rock formation is over 5 million years old.</p>
+                            <button class="ctrl-btn" style="padding:8px 15px; font-size:.9rem; width:100%;"><i class="fas fa-expand"></i> View 360° Experience</button>
+                        </div>
+                        <div class="info-panel" id="info2">
+                            <button class="close-btn">&times;</button>
+                            <h3><i class="fas fa-tree"></i> Ancient Forest</h3>
+                            <p>Protected forest with over 200 species. Click to hear ambient forest sounds.</p>
+                            <button class="ctrl-btn" style="padding:8px 15px; font-size:.9rem; width:100%;"><i class="fas fa-volume-up"></i> Play Forest Sounds</button>
+                        </div>
+                        <div class="info-panel" id="info3">
+                            <button class="close-btn">&times;</button>
+                            <h3><i class="fas fa-water"></i> Waterfall</h3>
+                            <p>Crystal Falls drop 80 meters into a natural pool. Click to see underwater footage.</p>
+                            <button class="ctrl-btn" style="padding:8px 15px; font-size:.9rem; width:100%;"><i class="fas fa-video"></i> Watch Underwater Video</button>
+                        </div>
+
+                        <!-- Playback Controls -->
+                        <div class="playback-controls">
+                            <button class="control-btn" id="rewind-btn"><i class="fas fa-step-backward"></i></button>
+                            <button class="control-btn" id="play-toggle"><i class="fas fa-play"></i></button>
+                            <button class="control-btn" id="forward-btn"><i class="fas fa-step-forward"></i></button>
+                            <div class="progress-bar" id="progress-track">
+                                <div class="progress" id="progress-bar"></div>
+                            </div>
+                            <div style="color:#fff; margin-left:10px; font-size:.9rem;" id="time-display">0:00 / 0:00</div>
+                            <button class="control-btn" id="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2><i class="fas fa-info-circle"></i> About This Experience</h2>
+                <p>This demo showcases a VR 180 immersive experience with interactive hotspots and a working video player.</p>
+                <ul style="margin:15px 0 15px 20px; line-height:1.8;">
+                    <li>True 180° video playback (A-Frame videosphere)</li>
+                    <li>WebXR integration for VR headsets</li>
+                    <li>Hotspot info panels</li>
+                    <li>Desktop & mobile friendly UI</li>
+                </ul>
+                <h3><i class="fas fa-vr-cardboard"></i> Compatible With</h3>
+                <div style="display:flex; gap:15px; margin:15px 0;">
+                    <div style="text-align:center;"><i class="fas fa-desktop" style="font-size:2rem; color:gold;"></i><p>Desktop</p></div>
+                    <div style="text-align:center;"><i class="fas fa-mobile-alt" style="font-size:2rem; color:gold;"></i><p>Mobile</p></div>
+                    <div style="text-align:center;"><i class="fas fa-vr-cardboard" style="font-size:2rem; color:gold;"></i><p>VR Headsets</p></div>
+                </div>
+                <h3><i class="fas fa-code"></i> Technical Details</h3>
+                <p>Built with HTML5, CSS3, JavaScript, and A-Frame (WebXR). Swap the video in assets/videos for your own 180° content.</p>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-globe-americas"></i></div><h3>180° Environment</h3><p>Immersive panoramic view</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-search"></i></div><h3>Interactive Hotspots</h3><p>Discover information and media</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>Cross-Platform</h3><p>Desktop, mobile, and VR headsets</p></div>
+        </div>
+
+        <footer>
+            <p>Created for the Hackathon: VR 180 Immersive Experience</p>
+            <p>Replace the sample video for best results before deployment.</p>
+        </footer>
+    </div>
+
+    <script src="js/demo.js"></script>
+</body>
+</html>

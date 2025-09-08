@@ -1,0 +1,23 @@
+# Ignore dependencies and build artifacts
+node_modules/
+.npm/
+
+# Build outputs
+/dist/
+/build/
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# OS and editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environment / local
+.env
+.vercel
+.netlify
+
