@@ -2,8 +2,10 @@
 
 **Explore the world in 180° VR right from your browser!**
 
-Live Demo [![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge\&logo=googlechrome)](https://umaima-s-pathan.github.io/VR-Hackathon/)
-Watch Video [![Watch Video](https://img.shields.io/badge/Watch-Loom%20Demo-blue?style=for-the-badge\&logo=loom)]([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=b731e5a7-9522-43da-b433-7e0e430917a6))
+Live Demo [(https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge\&logo=googlechrome)](https://umaima-s-pathan.github.io/VR-Hackathon/)
+
+
+Watch Video [(https://img.shields.io/badge/Watch-Loom%20Demo-blue?style=for-the-badge\&logo=loom)]([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=b731e5a7-9522-43da-b433-7e0e430917a6))
 
 ---
 
@@ -43,13 +45,13 @@ It delivers an **interactive and immersive experience** using **WebXR & Three.js
 
 ## 🎥 **Demo Video**
 
-📹 **Loom [Watch the Loom Demo]([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=90082fef-fe62-49ef-b1f6-cf0e2dd6149b))**
+📹 **Loom([YOUR-LOOM-VIDEO-LINK-HERE](https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=90082fef-fe62-49ef-b1f6-cf0e2dd6149b))**
 
 ---
 
 ## 🖼 **Screenshots**
 
-![Screenshot 1](<img width="1843" height="881" alt="Screenshot 2025-09-09 032622" src="https://github.com/user-attachments/assets/2c0a6462-fcca-4dca-a30b-3759c810e981" />
+(<img width="1843" height="881" alt="Screenshot 2025-09-09 032622" src="https://github.com/user-attachments/assets/2c0a6462-fcca-4dca-a30b-3759c810e981" />
 )
 
 ---
@@ -96,6 +98,9 @@ VR-Hackathon/
 ## 👩‍💻 **Author**
 
 **Umaima Pathan**
+
+
 LinkedIn ([YOUR-LINKEDIN-LINK](https://www.linkedin.com/in/umaima-pathan-b0586124a/))
 
 ---
+
