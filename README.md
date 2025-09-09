@@ -2,7 +2,7 @@
 
 **Explore the world in 180° VR right from your browser!**
 
-Live Demo (https://umaima-s-pathan.github.io/VR-Hackathon/)
+Live App (https://umaima-s-pathan.github.io/VR-Hackathon/)
 
 
 Watch Video (https://www.loom.com/share/02e6287b2acd478da57d8eedc6028289?sid=b731e5a7-9522-43da-b433-7e0e430917a6)
@@ -19,7 +19,7 @@ It delivers an **interactive and immersive experience** using **WebXR & Three.js
 
 ---
 
-## 🚀 **Live Demo**
+## 🚀 **Live App**
 
 🔗 **APP [Click here to explore the app](https://umaima-s-pathan.github.io/VR-Hackathon/)**
 
@@ -103,6 +103,7 @@ VR-Hackathon/
 LinkedIn ([YOUR-LINKEDIN-LINK](https://www.linkedin.com/in/umaima-pathan-b0586124a/))
 
 ---
+
 
 
 
